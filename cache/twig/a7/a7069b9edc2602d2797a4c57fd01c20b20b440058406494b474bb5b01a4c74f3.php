@@ -380,7 +380,6 @@ class __TwigTemplate_aec69f0867574986c7e211f66f89760868188b60ad45b142d9bdf4920eb
             }
         });
     </script>
-{% endblock %}
-", "chatbot.html.twig", "E:\\grav-admin-v1.7.45\\grav-admin\\user\\themes\\quark\\templates\\chatbot.html.twig");
+{% endblock %}", "chatbot.html.twig", "E:\\grav-admin-v1.7.45\\grav-admin\\user\\themes\\quark\\templates\\chatbot.html.twig");
     }
 }
