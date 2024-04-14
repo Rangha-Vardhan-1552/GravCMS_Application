@@ -37,7 +37,10 @@ class ChatbotPlugin extends Plugin
     /**
      * Handle AI bot request.
      */
-    public function handleAiBotRequest(Event $event)
+    /**
+ * Handle AI bot request.
+ */
+public function handleAiBotRequest(Event $event)
 {
     $request = $this->grav['request'];
 
@@ -46,13 +49,33 @@ class ChatbotPlugin extends Plugin
         $body = (string) $request->getBody(); // Get request body as string
         $data = json_decode($body, true); // Decode JSON string into associative array
 
-        // Check if the request data contains the expected message
-        if (isset($data['message']) && $data['message'] === 'hi') {
-            // Generate a response
-            $response = [
-                'status' => 'success',
-                'message' => 'Hello! How can I assist you?'
-            ];
+        // Check if the request data contains the 'message' key
+        if (isset($data['message'])) {
+            // Get the message from the request data
+            $message = strtolower($data['message']); // Convert message to lowercase for case-insensitive matching
+
+            // Determine response based on the keyword
+            switch ($message) {
+                case 'hi':
+                case 'hello':
+                    $response = [
+                        'status' => 'success',
+                        'message' => 'Hello! How can I assist you?'
+                    ];
+                    break;
+                case 'bye':
+                    $response = [
+                        'status' => 'success',
+                        'message' => 'Goodbye! Have a great day!'
+                    ];
+                    break;
+                default:
+                    $response = [
+                        'status' => 'error',
+                        'message' => 'Sorry, I didn\'t understand that.'
+                    ];
+                    break;
+            }
 
             // Send the response as JSON
             header('Content-Type: application/json');
@@ -61,5 +84,6 @@ class ChatbotPlugin extends Plugin
         }
     }
 }
+
 
 }

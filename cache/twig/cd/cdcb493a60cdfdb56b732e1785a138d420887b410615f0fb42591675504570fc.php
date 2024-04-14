@@ -38,6 +38,7 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
         <p><a href=\"http://getgrav.org\">Grav</a> was <i class=\"fa fa-code\"></i> with <i class=\"fa fa-heart-o pulse \"></i> by <a href=\"https://trilby.media\">Trilby Media</a>.</p>
     </section>
 </section>
+
 ";
         
         $__internal_57054b9517dd8b3da0f938a595b841d745c7d753e57333ce87e0f394208342f4->leave($__internal_57054b9517dd8b3da0f938a595b841d745c7d753e57333ce87e0f394208342f4_prof);
@@ -74,6 +75,7 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
         <p><a href=\"http://getgrav.org\">Grav</a> was <i class=\"fa fa-code\"></i> with <i class=\"fa fa-heart-o pulse \"></i> by <a href=\"https://trilby.media\">Trilby Media</a>.</p>
     </section>
 </section>
+
 ", "partials/footer.html.twig", "E:\\grav-admin-v1.7.45\\grav-admin\\user\\themes\\quark\\templates\\partials\\footer.html.twig");
     }
 }
