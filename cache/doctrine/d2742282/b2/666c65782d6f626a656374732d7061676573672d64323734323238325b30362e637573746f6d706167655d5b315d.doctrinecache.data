@@ -1,0 +1,4 @@
+1713084636
+O:39:"Grav\Common\Flex\Types\Pages\PageObject":4:{s:4:"type";s:5:"pages";s:3:"key";s:10:"custompage";s:8:"elements";a:4:{s:4:"root";b:0;s:6:"header";a:3:{s:5:"title";s:10:"customPage";s:10:"twig_first";b:1;s:8:"template";s:4:"page";}s:11:"frontmatter";s:49:"title: customPage
+twig_first: true
+template: page";s:8:"markdown";s:0:"";}s:7:"storage";a:6:{s:3:"key";s:10:"custompage";s:11:"storage_key";s:13:"06.custompage";s:8:"template";s:4:"page";s:17:"storage_timestamp";i:1713034853;s:8:"markdown";a:1:{s:0:"";a:1:{s:4:"page";i:1713034853;}}s:8:"checksum";s:32:"8e84a203745483bb46d64a73804a3a25";}}

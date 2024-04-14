@@ -1,0 +1,84 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Chatbot Interface</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="chat-container" class="overflow-auto" style="height: 300px;">
+                            {% if api_response %}
+                                <div class="message bot">{{ api_response.message }}</div>
+                            {% else %}
+                                <div class="message bot">Chatbot response will appear here...</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <form id="chat-form">
+                            <div class="input-group">
+                                <input type="text" id="message-input" class="form-control" placeholder="Type your message...">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code for handling chatbot interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatForm = document.getElementById('chat-form');
+            const chatContainer = document.getElementById('chat-container');
+            const messageInput = document.getElementById('message-input');
+
+            // Function to add a message to the chat container
+            function addMessage(message, isUser = false) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', isUser ? 'user' : 'bot');
+                messageElement.innerText = message;
+                chatContainer.appendChild(messageElement);
+            }
+
+            // Function to handle form submission (sending message)
+            chatForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const message = messageInput.value.trim();
+                if (message === '') return;
+                
+                addMessage(`You: ${message}`, true); // Add user message to chat
+                sendMessageToChatbot(message);
+                messageInput.value = ''; // Clear input field
+            });
+
+            // Function to send user message to chatbot (API request)
+            function sendMessageToChatbot(message) {
+                // Example: Send message to chatbot API and get response
+                // Replace this with your actual API request logic
+                const apiUrl = 'http://localhost:8000/aibot'; // Your chatbot API URL
+                fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const botMessage = data.message; // Assuming the API response contains the bot's message
+                    addMessage(`Bot: ${botMessage}`); // Add bot's message to chat
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        });
+    </script>
+{% endblock %}
