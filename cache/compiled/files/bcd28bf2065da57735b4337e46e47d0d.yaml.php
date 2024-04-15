@@ -2,8 +2,8 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => 'E:/grav-admin-v1.7.45/grav-admin/user/plugins/chatbot/blueprints.yaml',
-    'modified' => 1713094971,
-    'size' => 1046,
+    'modified' => 1713174178,
+    'size' => 1621,
     'data' => [
         'name' => 'Chatbot',
         'slug' => 'chatbot',
@@ -43,10 +43,10 @@ return [
                         'type' => 'bool'
                     ]
                 ],
-                'text_var' => [
+                'chatbot_name' => [
                     'type' => 'text',
-                    'label' => 'PLUGIN_CHATBOT.TEXT_VARIABLE',
-                    'help' => 'PLUGIN_CHATBOT.TEXT_VARIABLE_HELP'
+                    'label' => 'Chatbot_name',
+                    'help' => 'select the chatbot name'
                 ],
                 'api_url' => [
                     'type' => 'text',
@@ -55,6 +55,40 @@ return [
                     'validate' => [
                         'required' => true
                     ]
+                ],
+                'query_param' => [
+                    'type' => 'select',
+                    'label' => 'Query Parameter',
+                    'help' => 'Select the query parameter',
+                    'options' => [
+                        'browser' => 'browser',
+                        'question' => 'question'
+                    ],
+                    'validate' => [
+                        'required' => true
+                    ]
+                ],
+                'query_output' => [
+                    'type' => 'select',
+                    'label' => 'Query Output',
+                    'help' => 'Select the query output',
+                    'options' => [
+                        'JSON' => 'JSON',
+                        'TEXT' => 'TEXT'
+                    ],
+                    'validate' => [
+                        'required' => true
+                    ]
+                ],
+                'Latitude' => [
+                    'type' => 'number',
+                    'label' => 'Latitude',
+                    'help' => 'select the latitude'
+                ],
+                'Longitude' => [
+                    'type' => 'number',
+                    'label' => 'Longitude',
+                    'help' => 'select the longitude'
                 ]
             ]
         ]

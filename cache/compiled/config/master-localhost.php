@@ -1,8 +1,8 @@
 <?php
 return [
     '@class' => 'Grav\\Common\\Config\\CompiledConfig',
-    'timestamp' => 1713122055,
-    'checksum' => 'f17a31be7d5a36ea1a97557316abfb22',
+    'timestamp' => 1713177704,
+    'checksum' => 'fe2cc73b1285d1a8710ba6dd4a96f82e',
     'files' => [
         'user/config' => [
             'media' => [
@@ -11,7 +11,7 @@ return [
             ],
             'plugins/chatbot' => [
                 'file' => 'user/config/plugins/chatbot.yaml',
-                'modified' => 1713081914
+                'modified' => 1713176503
             ],
             'security' => [
                 'file' => 'user/config/security.yaml',
@@ -23,7 +23,7 @@ return [
             ],
             'system' => [
                 'file' => 'user/config/system.yaml',
-                'modified' => 1713122044
+                'modified' => 1713177594
             ],
             'versions' => [
                 'file' => 'user/config/versions.yaml',
@@ -231,12 +231,18 @@ return [
             ],
             'chatbot' => [
                 'enabled' => true,
-                'text_var' => NULL,
+                'text_var' => 'Custom Text added by the **Chatbot** plugin (disable plugin to remove)',
                 'active' => true,
                 'route' => '/plugin/chatbot',
                 'filters' => [
                     'category' => 'blog'
-                ]
+                ],
+                'chatbot_name' => 'Q&A Chatbot',
+                'api_url' => 'http://localhost:8000/aibot',
+                'query_param' => 'question',
+                'query_output' => 'JSON',
+                'Latitude' => 11,
+                'Longitude' => 15
             ],
             'devtools' => [
                 'enabled' => true,

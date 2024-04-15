@@ -4,6 +4,15 @@ namespace Grav\Plugin;
 use Grav\Common\Plugin;
 use RocketTheme\Toolbox\Event\Event;
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
+// Handle preflight OPTIONS request
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 /**
  * Class ChatbotPlugin
  * @package Grav\Plugin
@@ -34,19 +43,21 @@ class ChatbotPlugin extends Plugin
         ]);
     }
 
-    /**
-     * Handle AI bot request.
-     */
-    /**
+ /**
  * Handle AI bot request.
  */
 public function handleAiBotRequest(Event $event)
 {
-    $request = $this->grav['request'];
+    // Check if the request method is POST
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Get the query parameters from the URL
+        $queryParam = isset($_GET['query_param']) ? $_GET['query_param'] : '';
+        $queryOutput = isset($_GET['query_output']) ? $_GET['query_output'] : '';
+        $latitude = isset($_GET['Latitude']) ? $_GET['Latitude'] : '';
+        $longitude = isset($_GET['Longitude']) ? $_GET['Longitude'] : '';
 
-    // Check if the request method is POST and the requested URL matches '/aibot'
-    if ($request->getMethod() === 'POST' && $request->getUri()->getPath() === '/aibot') {
-        $body = (string) $request->getBody(); // Get request body as string
+        // Get the request body as JSON
+        $body = file_get_contents('php://input');
         $data = json_decode($body, true); // Decode JSON string into associative array
 
         // Check if the request data contains the 'message' key
@@ -54,35 +65,40 @@ public function handleAiBotRequest(Event $event)
             // Get the message from the request data
             $message = strtolower($data['message']); // Convert message to lowercase for case-insensitive matching
 
+            // Construct the API URL using the parameters from the URL
+            $apiUrl =  $this->grav['config']->get('plugins.chatbot.api_url')  . '?query_param=' . urlencode($queryParam) . '&query_output=' . urlencode($queryOutput) . '&Latitude=' . urlencode($latitude) . '&Longitude=' . urlencode($longitude);
+
             // Determine response based on the keyword
             switch ($message) {
                 case 'hi':
                 case 'hello':
                     $response = [
                         'status' => 'success',
-                        'message' => 'Hello! How can I assist you?'
+                        'message' => 'Hello! How can I assist you?',
+                        'url' => $apiUrl
                     ];
                     break;
                 case 'bye':
                     $response = [
                         'status' => 'success',
-                        'message' => 'Goodbye! Have a great day!'
+                        'message' => 'Goodbye! Have a great day!',
+                        'url' => $apiUrl
                     ];
                     break;
                 case 'what is the weather like today?':
                     $response=[
                         'status'=>'success',
-                        'message'=> "It's looks like strong gusty winds "
+                        'message'=> "It's looks like strong gusty winds ",
+                        'url' => $apiUrl
                     ];
                     break;
                 case "what is your favorite book?":
                     $response=[
                         'status'=>'success',
-                        'message'=> "I don't have personal preferences, but I can recommend some popular books"
+                        'message'=> "I don't have personal preferences, but I can recommend some popular books",
+                        'url' => $apiUrl
                     ];
                     break;
-
-
                 default:
                     $response = [
                         'status' => 'error',
