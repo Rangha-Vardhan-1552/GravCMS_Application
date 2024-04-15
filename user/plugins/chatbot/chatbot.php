@@ -69,6 +69,20 @@ public function handleAiBotRequest(Event $event)
                         'message' => 'Goodbye! Have a great day!'
                     ];
                     break;
+                case 'what is the weather like today?':
+                    $response=[
+                        'status'=>'success',
+                        'message'=> "It's looks like strong gusty winds "
+                    ];
+                    break;
+                case "what is your favorite book?":
+                    $response=[
+                        'status'=>'success',
+                        'message'=> "I don't have personal preferences, but I can recommend some popular books"
+                    ];
+                    break;
+
+
                 default:
                     $response = [
                         'status' => 'error',

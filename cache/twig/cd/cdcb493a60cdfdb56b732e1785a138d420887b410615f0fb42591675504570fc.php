@@ -33,11 +33,17 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
         echo "<style>
         /* CSS for chat container */
         #chat-container {
-            max-height: 300px;
+            max-height: 250px;
             overflow-y: auto;
             padding: 10px;
             /* border: 1px solid #ccc;
             border-radius: 5px; */
+            
+        }
+
+         .card{
+            border-radius:10px;
+            background:rgb(244, 248, 253);
         }
 
         #chat-form {
@@ -48,7 +54,7 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
             margin-bottom: 10px;
             padding: 8px 12px;
             border-radius: 15px;
-            max-width:40%;
+            max-width:50%;
 
         }
         .user {
@@ -58,7 +64,8 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
             margin-left: auto; /* Push user messages to the right */
         }
         .bot {
-            background-color: #f0f0f0;
+            /* background-color: #f0f0f0; */
+            background-color:white; 
             color: #333;
             align-self: flex-start;
         }
@@ -74,7 +81,7 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
             animation: typing 1s infinite;
         }
         @keyframes typing {
-            0% { opacity: 0; }
+            0% { opacity: 0.5; }
             50% { opacity: 0.5; }
             100% { opacity: 1; }
         }
@@ -90,22 +97,30 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
             border-radius: 10px;
         }
 
-    </style>
+        #chatbot-trigger-btn:hover{
+            cursor:pointer;
+        }
+       .chatbot-trigger{
+        text-align:right;
+       }
 
+</style>
+
+<div class=\"chatbot-trigger\" style=\"position: fixed; bottom: 60px;right:60px;justify-content:right;\">
+        <img src=\"https://img.freepik.com/premium-vector/robot-icon-chat-bot-sign-support-service-concept-chatbot-character-flat-style_41737-795.jpg\" alt=\"Chatbot\" id=\"chatbot-trigger-btn\" style=\"width: 20%; height: 30%;\">
+</div>
 <section id=\"footer\" class=\"section bg-gray\">
     <!-- Chatbot image trigger -->
-    <div class=\"chatbot-trigger\" style=\"position: fixed; bottom: 60px; right: 5px;\">
-        <img src=\"https://img.freepik.com/premium-vector/robot-icon-chat-bot-sign-support-service-concept-chatbot-character-flat-style_41737-795.jpg\" alt=\"Chatbot\" id=\"chatbot-trigger-btn\" style=\"width: 30%; height: 30%;\">
-    </div>
     <!-- Chatbot container -->
-    <div id=\"chatbot-popup\" style=\"display: none; position: fixed; bottom: 250px; right: 30px; background-color: white;  width: 30%; height:60%\">
+    <div id=\"chatbot-popup\" style=\"display: none; position: fixed; bottom: 250px; right: 5px; background-color: white;  width: 30%;\">
         <!-- Chatbot container content -->
         <div class=\"container\">
         <div class=\"row\">
             <div class=\"col-9 offset-3\">
                 <div class=\"card\">
                     <div class=\"card-header\">
-                        <h3 class=\"text-center\">Chatbot Interface</h3>
+                        <h3 class=\"text-center\">Chatbot</h3>
+                        <p><strong>Welcome</strong></p>
                     </div>
                     <div class=\"card-body\">
                         <div>
@@ -132,7 +147,7 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
     </div>
     <!-- Other content in the footer -->
     <section class=\"container ";
-        // line 102
+        // line 117
         echo twig_escape_filter($this->env, ($context["grid_size"] ?? null), "html", null, true);
         echo "\">
         <p><a href=\"http://getgrav.org\">Grav</a> was <i class=\"fa fa-code\"></i> with <i class=\"fa fa-heart-o pulse \"></i> by <a href=\"https://trilby.media\">Trilby Media</a>.</p>
@@ -140,6 +155,7 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
 </section>
 
 <script>
+    //Popup container
     document.addEventListener('DOMContentLoaded', function() {
         const chatbotTriggerBtn = document.getElementById('chatbot-trigger-btn');
         const chatbotPopup = document.getElementById('chatbot-popup');
@@ -152,6 +168,7 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
             }
         });
     });
+
 
     document.addEventListener('DOMContentLoaded', function() {
             const chatContainer = document.getElementById('chat-container');
@@ -227,7 +244,7 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
 
     public function getDebugInfo()
     {
-        return array (  136 => 102,  33 => 1,);
+        return array (  151 => 117,  33 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -243,11 +260,17 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
         return new Source("<style>
         /* CSS for chat container */
         #chat-container {
-            max-height: 300px;
+            max-height: 250px;
             overflow-y: auto;
             padding: 10px;
             /* border: 1px solid #ccc;
             border-radius: 5px; */
+            
+        }
+
+         .card{
+            border-radius:10px;
+            background:rgb(244, 248, 253);
         }
 
         #chat-form {
@@ -258,7 +281,7 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
             margin-bottom: 10px;
             padding: 8px 12px;
             border-radius: 15px;
-            max-width:40%;
+            max-width:50%;
 
         }
         .user {
@@ -268,7 +291,8 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
             margin-left: auto; /* Push user messages to the right */
         }
         .bot {
-            background-color: #f0f0f0;
+            /* background-color: #f0f0f0; */
+            background-color:white; 
             color: #333;
             align-self: flex-start;
         }
@@ -284,7 +308,7 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
             animation: typing 1s infinite;
         }
         @keyframes typing {
-            0% { opacity: 0; }
+            0% { opacity: 0.5; }
             50% { opacity: 0.5; }
             100% { opacity: 1; }
         }
@@ -300,22 +324,30 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
             border-radius: 10px;
         }
 
-    </style>
+        #chatbot-trigger-btn:hover{
+            cursor:pointer;
+        }
+       .chatbot-trigger{
+        text-align:right;
+       }
 
+</style>
+
+<div class=\"chatbot-trigger\" style=\"position: fixed; bottom: 60px;right:60px;justify-content:right;\">
+        <img src=\"https://img.freepik.com/premium-vector/robot-icon-chat-bot-sign-support-service-concept-chatbot-character-flat-style_41737-795.jpg\" alt=\"Chatbot\" id=\"chatbot-trigger-btn\" style=\"width: 20%; height: 30%;\">
+</div>
 <section id=\"footer\" class=\"section bg-gray\">
     <!-- Chatbot image trigger -->
-    <div class=\"chatbot-trigger\" style=\"position: fixed; bottom: 60px; right: 5px;\">
-        <img src=\"https://img.freepik.com/premium-vector/robot-icon-chat-bot-sign-support-service-concept-chatbot-character-flat-style_41737-795.jpg\" alt=\"Chatbot\" id=\"chatbot-trigger-btn\" style=\"width: 30%; height: 30%;\">
-    </div>
     <!-- Chatbot container -->
-    <div id=\"chatbot-popup\" style=\"display: none; position: fixed; bottom: 250px; right: 30px; background-color: white;  width: 30%; height:60%\">
+    <div id=\"chatbot-popup\" style=\"display: none; position: fixed; bottom: 250px; right: 5px; background-color: white;  width: 30%;\">
         <!-- Chatbot container content -->
         <div class=\"container\">
         <div class=\"row\">
             <div class=\"col-9 offset-3\">
                 <div class=\"card\">
                     <div class=\"card-header\">
-                        <h3 class=\"text-center\">Chatbot Interface</h3>
+                        <h3 class=\"text-center\">Chatbot</h3>
+                        <p><strong>Welcome</strong></p>
                     </div>
                     <div class=\"card-body\">
                         <div>
@@ -347,6 +379,7 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
 </section>
 
 <script>
+    //Popup container
     document.addEventListener('DOMContentLoaded', function() {
         const chatbotTriggerBtn = document.getElementById('chatbot-trigger-btn');
         const chatbotPopup = document.getElementById('chatbot-popup');
@@ -359,6 +392,7 @@ class __TwigTemplate_70eceeafd709a1fed0907491b1167de68a0e02a9ed0376a9fcab1dd7096
             }
         });
     });
+
 
     document.addEventListener('DOMContentLoaded', function() {
             const chatContainer = document.getElementById('chat-container');
