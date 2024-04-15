@@ -51,7 +51,8 @@ public function handleAiBotRequest(Event $event)
     // Check if the request method is POST
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Get the query parameters from the URL
-        $queryParam = isset($_GET['query_param']) ? $_GET['query_param'] : '';
+        $question = isset($_GET['question']) ? $_GET['question'] : '';
+        $browser = isset($_GET['browser']) ? $_GET['browser'] : '';
         $queryOutput = isset($_GET['query_output']) ? $_GET['query_output'] : '';
         $latitude = isset($_GET['Latitude']) ? $_GET['Latitude'] : '';
         $longitude = isset($_GET['Longitude']) ? $_GET['Longitude'] : '';
@@ -66,7 +67,7 @@ public function handleAiBotRequest(Event $event)
             $message = strtolower($data['message']); // Convert message to lowercase for case-insensitive matching
 
             // Construct the API URL using the parameters from the URL
-            $apiUrl =  $this->grav['config']->get('plugins.chatbot.api_url')  . '?query_param=' . urlencode($queryParam) . '&query_output=' . urlencode($queryOutput) . '&Latitude=' . urlencode($latitude) . '&Longitude=' . urlencode($longitude);
+            $apiUrl =  $this->grav['config']->get('plugins.chatbot.api_url')  . '?question=' . urlencode($question). '&browser=' . urlencode($browser) . '&query_output=' . urlencode($queryOutput) . '&Latitude=' . urlencode($latitude) . '&Longitude=' . urlencode($longitude);
 
             // Determine response based on the keyword
             switch ($message) {

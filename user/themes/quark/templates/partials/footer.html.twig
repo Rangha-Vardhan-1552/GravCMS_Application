@@ -178,12 +178,12 @@
         function sendMessageToChatbot(message) {
             // Replace this with your actual API request logic
             const api_url = '{{ config.plugins.chatbot.api_url }}';
-            const query_param = '{{ config.plugins.chatbot.query_param }}';
+            const {{ config.plugins.chatbot.query_param }} = '{{ config.plugins.chatbot.query_param }}';
             const query_output = '{{ config.plugins.chatbot.query_output }}';
             const latitude = '{{ config.plugins.chatbot.Latitude }}';
             const longitude = '{{ config.plugins.chatbot.Longitude }}';
             // &message=${encodeURIComponent(message)
-            const apiUrl = `${api_url}?query_param=${query_param}&query_output=${query_output}&Latitude=${latitude}&Longitude=${longitude}}`;
+            const apiUrl = `${api_url}?{{ config.plugins.chatbot.query_param }}=&query_output=${query_output}&Latitude=${latitude}&Longitude=${longitude}}`;
 
             fetch(apiUrl, {
                     method: 'POST',

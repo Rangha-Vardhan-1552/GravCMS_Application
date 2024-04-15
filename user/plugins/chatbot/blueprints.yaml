@@ -66,6 +66,17 @@ form:
       type: number
       label: Longitude
       help: select the longitude
+    # dropdown_field:
+    #   type: selectize
+    #   label: Dropdown Field
+    #   help: Select multiple items
+    #   multiple: true
+    #   options:
+    #     option1: Option 1
+    #     option2: Option 2
+    #     option3: Option 3
+    
+
 
 
 

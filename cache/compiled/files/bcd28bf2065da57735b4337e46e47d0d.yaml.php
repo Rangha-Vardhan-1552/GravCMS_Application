@@ -2,8 +2,8 @@
 return [
     '@class' => 'Grav\\Common\\File\\CompiledYamlFile',
     'filename' => 'E:/grav-admin-v1.7.45/grav-admin/user/plugins/chatbot/blueprints.yaml',
-    'modified' => 1713174178,
-    'size' => 1621,
+    'modified' => 1713180595,
+    'size' => 1863,
     'data' => [
         'name' => 'Chatbot',
         'slug' => 'chatbot',
