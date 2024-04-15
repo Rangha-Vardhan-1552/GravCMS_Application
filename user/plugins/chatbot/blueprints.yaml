@@ -41,12 +41,10 @@ form:
       validate:
         required: true
     query_param:
-      type: select
-      label: Query Parameter
-      help: Select the query parameter
-      options:
-        browser: browser
-        question: question
+      type: selectize
+      label: Parameter
+      help: Select multiple items
+      multiple: true
       validate:
         required: true
     query_output:
@@ -66,15 +64,7 @@ form:
       type: number
       label: Longitude
       help: select the longitude
-    # dropdown_field:
-    #   type: selectize
-    #   label: Dropdown Field
-    #   help: Select multiple items
-    #   multiple: true
-    #   options:
-    #     option1: Option 1
-    #     option2: Option 2
-    #     option3: Option 3
+
     
 
 

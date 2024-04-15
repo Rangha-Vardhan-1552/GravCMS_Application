@@ -6,7 +6,13 @@ filters:
   category: blog
 chatbot_name: 'Q&A Chatbot'
 api_url: 'http://localhost:8000/aibot'
-query_param: question
+query_param: 'browser,question,subject'
 query_output: JSON
-Latitude: 11
-Longitude: 15
+Latitude: 12
+Longitude: 34
+dropdown_field: 'question,subject'
+my_dynamic_select_field: ''
+my_multi_select_field:
+  my-multi-select-field-option1: option1
+  my-multi-select-field-option2: option2
+  my-multi-select-field-option3: '0'
