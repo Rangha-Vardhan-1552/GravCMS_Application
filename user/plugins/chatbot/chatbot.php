@@ -50,25 +50,24 @@ public function handleAiBotRequest(Event $event)
 {
     // Check if the request method is POST
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Get the query parameters from the URL
-        $question = isset($_GET['question']) ? $_GET['question'] : '';
-        $browser = isset($_GET['browser']) ? $_GET['browser'] : '';
-        $queryOutput = isset($_GET['query_output']) ? $_GET['query_output'] : '';
-        $latitude = isset($_GET['Latitude']) ? $_GET['Latitude'] : '';
-        $longitude = isset($_GET['Longitude']) ? $_GET['Longitude'] : '';
-
+        // Dynamically retrieve query parameters from the URL
+        $params = $_GET;
+        foreach ($params as $key => $value) {
+            $$key = isset($_GET[$key]) ? $_GET[$key] : '';
+        }
+    
         // Get the request body as JSON
         $body = file_get_contents('php://input');
         $data = json_decode($body, true); // Decode JSON string into associative array
-
+    
         // Check if the request data contains the 'message' key
         if (isset($data['message'])) {
             // Get the message from the request data
             $message = strtolower($data['message']); // Convert message to lowercase for case-insensitive matching
-
+    
             // Construct the API URL using the parameters from the URL
-            $apiUrl =  $this->grav['config']->get('plugins.chatbot.api_url')  . '?question=' . urlencode($question). '&browser=' . urlencode($browser) . '&query_output=' . urlencode($queryOutput) . '&Latitude=' . urlencode($latitude) . '&Longitude=' . urlencode($longitude);
-
+            $apiUrl =  $this->grav['config']->get('plugins.chatbot.api_url')  . '?' . http_build_query($params);
+    
             // Determine response based on the keyword
             switch ($message) {
                 case 'hi':
@@ -107,13 +106,14 @@ public function handleAiBotRequest(Event $event)
                     ];
                     break;
             }
-
+    
             // Send the response as JSON
             header('Content-Type: application/json');
             echo json_encode($response);
             exit(); // Stop further processing
         }
     }
+    
 }
 
 

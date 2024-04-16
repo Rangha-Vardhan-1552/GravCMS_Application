@@ -179,8 +179,8 @@
             // Replace this with your actual API request logic
             const api_url = '{{ config.plugins.chatbot.api_url }}';
             const query_output = '{{ config.plugins.chatbot.query_output }}';
-            const latitude = '{{ config.plugins.chatbot.Latitude }}';
-            const longitude = '{{ config.plugins.chatbot.Longitude }}';
+            const latitude = '{{ config.plugins.chatbot.latitude }}';
+            const longitude = '{{ config.plugins.chatbot.longitude }}';
             const dropdown_param = '{{ config.plugins.chatbot.query_param }}';
             const arrayDropdownParam=dropdown_param.split(',')
            const parameters = [];
@@ -194,7 +194,7 @@
             const parameterString = parameters.join('&');
 
             // Construct the apiUrl with the parameters
-            const apiUrl = `${api_url}?${parameterString}&query_output=${query_output}&Latitude=${latitude}&Longitude=${longitude}`;
+            const apiUrl = `${api_url}?${parameterString}&query_output=${query_output}&latitude=${latitude}&longitude=${longitude}`;
             fetch(apiUrl, {
                     method: 'POST',
                     headers: {

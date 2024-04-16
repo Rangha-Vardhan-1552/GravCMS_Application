@@ -56,11 +56,11 @@ form:
         TEXT: TEXT
       validate:
         required: true
-    Latitude:
+    latitude:
       type: number
       label: Latitude
       help: select the latitude
-    Longitude:
+    longitude:
       type: number
       label: Longitude
       help: select the longitude
