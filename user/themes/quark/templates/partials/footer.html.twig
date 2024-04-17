@@ -176,44 +176,33 @@
         });
 
         function sendMessageToChatbot(message) {
-            // Replace this with your actual API request logic
-            const api_url = '{{ config.plugins.chatbot.api_url }}';
-            const query_output = '{{ config.plugins.chatbot.query_output }}';
-            const latitude = '{{ config.plugins.chatbot.latitude }}';
-            const longitude = '{{ config.plugins.chatbot.longitude }}';
-            const dropdown_param = '{{ config.plugins.chatbot.query_param }}';
-            const arrayDropdownParam=dropdown_param.split(',')
-           const parameters = [];
+    // Replace this with your actual API request logic
+    const api_url = '{{ config.plugins.chatbot.api_url }}';
+    const apiUrl = `${api_url}?message=${message}`;
 
-            // Iterate over the array and construct the parameters
-            arrayDropdownParam.forEach(value => {
-                parameters.push(`${encodeURIComponent(value)}=`);
-            });
+    fetch(apiUrl)
+        .then(response => {
+            // Check if the response is successful
+            console.log("response",response);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            // Parse the JSON response
+            return response.json();
+        })
+        .then(data => {
+            hideTypingIndicator();
+            const botMessage = data.reply;
+            addMessage(botMessage);
+        })
+        .catch(error => {
+            // Handle errors
+            hideTypingIndicator();
+            addMessage('Bot: Sorry, an error occurred while fetching the response');
+            console.error('Error:', error);
+        });
+}
 
-            // Join the parameters array into a single string
-            const parameterString = parameters.join('&');
-
-            // Construct the apiUrl with the parameters
-            const apiUrl = `${api_url}?${parameterString}&query_output=${query_output}&latitude=${latitude}&longitude=${longitude}`;
-            fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ message }),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    hideTypingIndicator();
-                    const botMessage = data.message;
-                    addMessage(`Bot: ${botMessage}`);
-                })
-                .catch(error => {
-                    hideTypingIndicator();
-                    addMessage('Bot: Sorry, an error occurred.');
-                    console.error('Error:', error);
-                });
-        }
     });
 
 </script>

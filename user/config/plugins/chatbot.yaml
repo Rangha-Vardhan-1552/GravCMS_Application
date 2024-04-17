@@ -5,8 +5,8 @@ route: /plugin/chatbot
 filters:
   category: blog
 chatbot_name: 'Q&A Chatbot'
-api_url: 'http://localhost:8000/aibot'
-query_param: 'browser,question,subject,encode,minimum_words'
+api_url: 'https://585d-3-110-251-207.ngrok-free.app/reply'
+query_param: 'browser,question,subject,encode'
 query_output: JSON
 Latitude: 12
 Longitude: 34
@@ -16,5 +16,16 @@ my_multi_select_field:
   my-multi-select-field-option1: option1
   my-multi-select-field-option2: option2
   my-multi-select-field-option3: '0'
-latitude: 15
-longitude: 34
+latitude: 17
+longitude: 78
+city_name: hyderabad
+radius: '20000'
+keyword: restaurant
+key: AIzaSyCbNamYgr3kXyFUCiV20PDutr96QrZp4Ro
+searchTerm: stair
+sort: asc
+offer: 'false'
+type: rent
+furnished: 'false'
+parking: 'false'
+message: hello

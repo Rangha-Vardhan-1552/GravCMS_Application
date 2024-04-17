@@ -40,37 +40,27 @@ form:
       default: "https://localhost:8000/aibot"
       validate:
         required: true
-    query_param:
-      type: selectize
-      label: Parameter
-      help: Select multiple items
-      multiple: true
-      validate:
-        required: true
-    query_output:
-      type: select
-      label: Query Output
-      help: Select the query output
-      options:
-        JSON: JSON
-        TEXT: TEXT
-      validate:
-        required: true
-    latitude:
-      type: number
-      label: Latitude
-      help: select the latitude
-    longitude:
-      type: number
-      label: Longitude
-      help: select the longitude
-
-    
-
-
-
-
-
-
-    
-        
+    # query_param:
+    #   type: selectize
+    #   label: Parameter
+    #   help: Select multiple items
+    #   multiple: true
+    #   validate:
+    #     required: true
+    # query_output:
+    #   type: select
+    #   label: Query Output
+    #   help: Select the query output
+    #   options:
+    #     JSON: JSON
+    #     TEXT: TEXT
+    #   validate:
+    #     required: true
+    # message:
+    #   type: text
+    #   label: message_param
+    #   help: select the prameter
+    # longitude:
+    #   type: number
+    #   label: Longitude
+    #   help: select the longitude

@@ -49,7 +49,7 @@ class ChatbotPlugin extends Plugin
 public function handleAiBotRequest(Event $event)
 {
     // Check if the request method is POST
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // Dynamically retrieve query parameters from the URL
         $params = $_GET;
         foreach ($params as $key => $value) {
@@ -115,6 +115,4 @@ public function handleAiBotRequest(Event $event)
     }
     
 }
-
-
 }
