@@ -2,7 +2,7 @@
 <style>
     /* CSS for chat container */
     #chat-container {
-        max-height: 500px;
+        max-height: 250px;
         overflow-y: Scroll;
         padding: 10px;
     }
@@ -92,7 +92,7 @@
 <section id="footer" class="section bg-gray">
     <!-- Chatbot image trigger -->
     <!-- Chatbot container -->
-    <div id="chatbot-popup" style="display: none; position: fixed; bottom: 250px; right: 5px; background-color: white; width: 30%;">
+    <div id="chatbot-popup" style="display: none; position: fixed; bottom: 150px; right: 5px; background-color: white; width: 40%;">
         <!-- Chatbot container content -->
         <div class="container">
             <div class="row">
@@ -150,6 +150,9 @@
     const messageInput = document.getElementById('message-input');
 
     function addMessage(message, isUser = false) {
+    // Remove "\n" at the end of each sentence
+    // message = message.replace(/\n\s*/g, ' ');
+
     const messageElement = document.createElement('div');
     messageElement.classList.add('message', isUser ? 'user' : 'bot');
     chatContainer.appendChild(messageElement);
@@ -160,10 +163,9 @@
 
     const typingInterval = setInterval(() => {
         if (index < words.length) {
-            if(isUser===true){
-                messageElement.innerText = message;
-            }
-            else{
+            if (isUser === true) {
+                messageElement.innerText =message.replace(/\n/g, ' ');
+            } else {
                 messageElement.innerText += (index === 0 ? '' : ' ') + words[index];
                 index++;
             }
@@ -173,6 +175,7 @@
         }
     }, 200); // Adjust typing speed as needed
 }
+
 
     function showTypingIndicator() {
         typingIndicator.style.display = 'block';
@@ -195,24 +198,26 @@
 
     function sendMessageToChatbot(message) {
         const api_url = '{{ config.plugins.chatbot.api_url }}';
-        const apiUrl = `${api_url}`;
+        const apiUrl = `${api_url}?message=${message}`;
 
         fetch(apiUrl, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ input: message })
+            // body: JSON.stringify({ input: message })
         })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-           console.log(response.body);
+        //    console.log(response.body);
             return response.body;
         })
 
         .then(stream => {
+            // console.log("stream",stream)
+            // const streamReplay=stream.reply
             const decoder = new TextDecoder();
             const reader = stream.getReader();
             let messageBuffer = '';
