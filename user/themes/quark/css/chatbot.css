@@ -1,0 +1,84 @@
+
+    /* CSS for chat container */
+    #chat-container {
+        max-height: 250px;
+        overflow-y: Scroll;
+        padding: 10px;
+    }
+
+    .card {
+        border-radius: 10px;
+        background: rgb(244, 248, 253);
+    }
+
+    #chat-form {
+        justify-content: flex-end;
+        column-gap: 10px;
+    }
+
+    .message {
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        border-radius: 15px;
+        max-width: 50%;
+        overflow-y: auto;
+    }
+
+    .user {
+        background-color: #007bff;
+        color: #fff;
+        align-self: flex-end;
+        margin-left: auto; /* Push user messages to the right */
+    }
+
+    .bot {
+        background-color: white;
+        color: #333;
+        align-self: flex-start;
+    }
+
+    /* CSS for typing indicator */
+    .typing-indicator {
+        display: none;
+        margin-bottom: 5px; /* Move typing indicator to the bottom */
+        font-style: italic;
+        align-self: flex-start; /* Align to the right */
+    }
+
+    .typing-indicator::after {
+        content: 'Typing...';
+        animation: typing 1s infinite;
+    }
+
+    @keyframes typing {
+        0% {
+            opacity: 0.5;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    /* CSS for input field */
+    .form-control {
+        border-radius: 10px;
+        width: 70%;
+    }
+
+    /* CSS for send button */
+    .btn-primary {
+        border-radius: 10px;
+    }
+
+    #chatbot-trigger-btn:hover {
+        cursor: pointer;
+    }
+
+    .chatbot-trigger {
+        text-align: right;
+    }
