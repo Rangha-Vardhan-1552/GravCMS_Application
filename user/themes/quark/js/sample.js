@@ -5,7 +5,7 @@ const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
 
 let userMessage = null; // Variable to store user's message
-const API_KEY = "PASTE-YOUR-API-KEY"; // Paste your API key here
+const API_KEY = ""; // Paste your API key here
 const inputInitHeight = chatInput.scrollHeight;
 
 const createChatLi = (message, className) => {
@@ -31,18 +31,43 @@ const generateResponse = (chatElement) => {
         },
         body: JSON.stringify({
             model: "gpt-3.5-turbo",
-            messages: [{role: "user", content: userMessage}],
+            messages: [{ role: "user", content: userMessage }],
         })
-    }
+    };
 
-    // Send POST request to API, get response and set the reponse as paragraph text
-    fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
-        messageElement.textContent = data.choices[0].message.content.trim();
-    }).catch(() => {
-        messageElement.classList.add("error");
-        messageElement.textContent = "Oops! Something went wrong. Please try again.";
-    }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
-}
+    // Display "Thinking..." message while waiting for the response
+    messageElement.textContent = "Thinking...";
+
+    // Send POST request to API and handle streaming response
+    fetch(API_URL, requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            const content = data.choices[0].message.content.trim(); // Extract content from response
+
+            // Split the content into words
+            const words = content.split(' ');
+            let index = 0;
+            messageElement.textContent = "";
+            // Function to display words word-by-word with a delay
+                const typingInterval = setInterval(() => {
+                if (index < words.length) {
+                    // Append the next word to the partial message
+                    messageElement.textContent += (index === 0 ? '' : ' ') + words[index];
+                    index++;
+                } else {
+                    // Stop the interval when all words are displayed
+                    clearInterval(typingInterval);
+                    // Scroll to bottom after adding all words
+                    chatbox.scrollTo(0, chatbox.scrollHeight);
+                }
+            }, 200); // Adjust typing speed as needed
+        })
+        .catch(() => {
+            messageElement.classList.add("error");
+            messageElement.textContent = "Oops! Something went wrong. Please try again.";
+        });
+};
+
 
 const handleChat = () => {
     userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace

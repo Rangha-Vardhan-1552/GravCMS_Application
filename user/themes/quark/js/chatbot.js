@@ -1,126 +1,111 @@
-
-    //Popup container
-    document.addEventListener('DOMContentLoaded', function() {
-        const chatbotTriggerBtn = document.getElementById('chatbot-trigger-btn');
-        const chatbotPopup = document.getElementById('chatbot-popup');
-
-        chatbotTriggerBtn.addEventListener('click', function() {
-            if (chatbotPopup.style.display === 'none') {
-                chatbotPopup.style.display = 'block';
-            } else {
-                chatbotPopup.style.display = 'none';
-            }
-        });
-    });
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-    const chatContainer = document.getElementById('chat-container');
-    const typingIndicator = document.getElementById('typing-indicator');
-    const messageInput = document.getElementById('message-input');
-
-    function addMessage(message, isUser = false) {
-    // Remove "\n" at the end of each sentence
-    // message = message.replace(/\n\s*/g, ' ');
-
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message', isUser ? 'user' : 'bot');
-    chatContainer.appendChild(messageElement);
-    chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to bottom
-
-    const words = message.split(' ');
-    let index = 0;
-
-    const typingInterval = setInterval(() => {
-        if (index < words.length) {
-            if (isUser === true) {
-                messageElement.innerText =message.replace(/\n/g, ' ');
-            } else {
-                messageElement.innerText += (index === 0 ? '' : ' ') + words[index];
+var chatbotToggler = document.querySelector(".chatbot-toggler");
+var closeBtn = document.querySelector(".close-btn");
+var chatbox = document.querySelector(".chatbox");
+var chatInput = document.querySelector(".chat-input textarea");
+var sendChatBtn = document.querySelector(".chat-input span");
+var userMessage = null; // Variable to store user's message
+var API_KEY =""; // Paste your API key here
+var inputInitHeight = chatInput ? chatInput.scrollHeight : 0;
+var createChatLi = function (message, className) {
+    // Create a chat <li> element with passed message and className
+    var chatLi = document.createElement("li");
+    chatLi.classList.add("chat", "".concat(className));
+    var chatContent = className === "outgoing" ? "<p></p>" : "<span class=\"material-symbols-outlined\">smart_toy</span><p></p>";
+    chatLi.innerHTML = chatContent;
+    chatLi.querySelector("p").textContent = message;
+    return chatLi; // return chat <li> element
+};
+var generateResponse = function (chatElement) {
+    var API_URL = "https://api.openai.com/v1/chat/completions";
+    var messageElement = chatElement.querySelector("p");
+    // Define the properties and message for the API request
+    var requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer ".concat(API_KEY)
+        },
+        body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: userMessage }],
+        })
+    };
+    // Display "Thinking..." message while waiting for the response
+    if (messageElement)
+        messageElement.textContent = "Thinking...";
+    // Send POST request to API and handle streaming response
+    fetch(API_URL, requestOptions)
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+        var content = data.choices[0].message.content.trim(); // Extract content from response
+        // Split the content into words
+        var words = content.split(' ');
+        var index = 0;
+        if (messageElement)
+            messageElement.textContent = "";
+        // Function to display words word-by-word with a delay
+        var typingInterval = window.setInterval(function () {
+            if (index < words.length) {
+                // Append the next word to the partial message
+                if (messageElement)
+                    messageElement.textContent += (index === 0 ? '' : ' ') + words[index];
                 index++;
             }
-            
-        } else {
-            clearInterval(typingInterval);
+            else {
+                // Stop the interval when all words are displayed
+                clearInterval(typingInterval);
+                // Scroll to bottom after adding all words
+                if (chatbox)
+                    chatbox.scrollTo(0, chatbox.scrollHeight);
+            }
+        }, 200); // Adjust typing speed as needed
+    })
+        .catch(function () {
+        if (messageElement) {
+            messageElement.classList.add("error");
+            messageElement.textContent = "Oops! Something went wrong. Please try again.";
         }
-    }, 200); // Adjust typing speed as needed
-}
-
-
-    function showTypingIndicator() {
-        typingIndicator.style.display = 'block';
-    }
-
-    function hideTypingIndicator() {
-        typingIndicator.style.display = 'none';
-    }
-
-    document.getElementById('chat-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const message = messageInput.value.trim();
-        if (message === '') return;
-
-        addMessage(`You: ${message}`, true);
-        showTypingIndicator();
-        setTimeout(sendMessageToChatbot, 1000, message);
-        messageInput.value = '';
     });
-
-    function sendMessageToChatbot(message) {
-        const api_url = '{{ config.plugins.chatbot.api_url }}';
-        const apiUrl = `${api_url}?message=${message}`;
-
-        fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            // body: JSON.stringify({ input: message })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-        //    console.log(response.body);
-            return response.body;
-        })
-
-        .then(stream => {
-            // console.log("stream",stream)
-            // const streamReplay=stream.reply
-            const decoder = new TextDecoder();
-            const reader = stream.getReader();
-            let messageBuffer = '';
-
-            function read() {
-                reader.read().then(({ done, value }) => {
-                    if (done) {
-                        if (messageBuffer) {
-                            addMessage(messageBuffer);
-                        }
-                        hideTypingIndicator();
-                        return;
-                    }
-                    const text = decoder.decode(value, { stream: true });
-                    messageBuffer += text;
-                    // Update the UI with the latest chunk of message
-                    addMessage(messageBuffer);
-                    // Clear the buffer to avoid duplicate messages
-                    messageBuffer = '';
-                    read();
-                }).catch(error => {
-                    console.error('Error reading stream:', error);
-                });
-            }
-            read();
-        })
-        .catch(error => {
-            hideTypingIndicator();
-            addMessage('Bot: Sorry, an error occurred while fetching the response');
-            console.error('Error:', error);
-        });
+};
+var handleChat = function () {
+    userMessage = chatInput ? chatInput.value.trim() : null; // Get user entered message and remove extra whitespace
+    if (!userMessage)
+        return;
+    // Clear the input textarea and set its height to default
+    if (chatInput) {
+        chatInput.value = "";
+        chatInput.style.height = "".concat(inputInitHeight, "px");
     }
-
-    });
-
-
+    // Append the user's message to the chatbox
+    if (chatbox) {
+        chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+    }
+    setTimeout(function () {
+        // Display "Thinking..." message while waiting for the response
+        var incomingChatLi = createChatLi("Thinking...", "incoming");
+        if (chatbox) {
+            chatbox.appendChild(incomingChatLi);
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+        }
+        generateResponse(incomingChatLi);
+    }, 600);
+};
+chatInput === null || chatInput === void 0 ? void 0 : chatInput.addEventListener("input", function () {
+    // Adjust the height of the input textarea based on its content
+    if (chatInput) {
+        chatInput.style.height = "".concat(inputInitHeight, "px");
+        chatInput.style.height = "".concat(chatInput.scrollHeight, "px");
+    }
+});
+chatInput === null || chatInput === void 0 ? void 0 : chatInput.addEventListener("keydown", function (e) {
+    // If Enter key is pressed without Shift key and the window 
+    // width is greater than 800px, handle the chat
+    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+        e.preventDefault();
+        handleChat();
+    }
+});
+sendChatBtn === null || sendChatBtn === void 0 ? void 0 : sendChatBtn.addEventListener("click", handleChat);
+closeBtn === null || closeBtn === void 0 ? void 0 : closeBtn.addEventListener("click", function () { return document.body.classList.remove("show-chatbot"); });
+chatbotToggler === null || chatbotToggler === void 0 ? void 0 : chatbotToggler.addEventListener("click", function () { return document.body.classList.toggle("show-chatbot"); });
