@@ -1,6 +1,9 @@
 ---
-title: contactUs
+title: 'contact us'
+cache_enable: true
+process:
+    markdown: true
+    twig: true
 ---
 
-## Contact Us
-This page is  contact us
+{% include 'contactus.html.twig' %}
