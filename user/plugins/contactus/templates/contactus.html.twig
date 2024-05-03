@@ -53,37 +53,34 @@
   </div>
 </body>
 <script>
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent default form submission
-      
-      // Collect form data
-      var formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        subject: document.getElementById('subject').value
-      };
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact-form');
 
-      // Send form data via AJAX
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', '/contactus', true); // Replace '/your-server-endpoint' with your actual server endpoint
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          // Handle successful response
-          var response = JSON.parse(xhr.responseText);
-          console.log(response);
-          // Display response to the user
-          alert(response.message);
-        } else {
-          // Handle error response
-          alert('Error: ' + xhr.statusText);
-        }
-      };
-      xhr.onerror = function() {
-        // Handle connection error
-        alert('Error: Failed to send data');
-      };
-      xhr.send(JSON.stringify(formData));
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        
+        const formData = new FormData(form); // Get form data
+        
+        // Optional: You can perform client-side validation here
+        
+        // Send form data to server using fetch API
+        fetch('/contactus', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json()) // Assuming server returns JSON response
+        .then(data => {
+            // Handle server response here
+            console.log('Server response:', data);
+            // Optionally, you can show a success message or redirect the user
+        })
+        .catch(error => {
+            // Handle errors here
+            console.error('Error:', error);
+            // Optionally, show an error message to the user
+        });
     });
+});
+
 </script>
 </html>

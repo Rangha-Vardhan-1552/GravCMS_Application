@@ -891,6 +891,15 @@ class AdminPlugin extends Plugin
             'authorize' => $this->admin::toolsPermissions(),
             'priority' => -10
         ];
+
+
+        // $twig->plugins_hooked_nav['contactus'] = [
+        //     'route' => '/contactus',
+        //     'icon' => 'fa-database', // Choose an appropriate icon
+        //     'authorize' => ['contactus.access'], // Adjust authorization as needed
+        //     'priority' => 10 // Adjust the priority to position your item in the menu
+        // ];
+
     }
 
     /**

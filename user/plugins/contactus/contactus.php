@@ -55,28 +55,59 @@ class ContactusPlugin extends Plugin
         // Enable the main events we are interested in
         $this->enable([
             // Put your main events here
-            // 'onFormInitialized' => ['onFormInitialized', 0]
-            'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0]
+            'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
+            'onPageInitialized' => ['handlePostRequest', 0]
+
             
         ]);
     }
     public function onTwigTemplatePaths($event)
     {
         $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
-        // $form = $event['form'];
-        // if ($form->getName() === 'contactus') {
-        //     $form->setAction('/contactus');
-        //     $form->setMethod('POST');
-        //     $form->setTemplate('contactus');
-        // }
     }
-    
-    public function onFormProcessed(Event $event)
-    {
-        // Retrieve form data
-        $form = $event['form'];
 
-        // Pass form data to the template
-        $this->grav['twig']->twig_vars['form'] = $form;
+    public function handlePostRequest()
+    {
+        // Check if it's a POST request
+        if ($this->grav['uri']->post()) {
+            // Get the POST data
+            $postData = $this->grav['uri']->post();
+
+            // Process the data as needed
+            // For example, store it in a file
+            $this->storeData($postData);
+
+            // Return a response if needed
+            echo json_encode(['success' => true,'response' => $postData]);
+            exit();
+        }
     }
+
+    public function storeData($data)
+{
+    // Read existing data from the JSON file, if any
+    $existingData = $this->readExistingData();
+
+    // Append new data to the existing data
+    $existingData[] = $data;
+
+    // Save the updated data to the JSON file
+    $file = $this->grav['locator']->findResource('user://data/contactus/data.json', true, true);
+    $content = json_encode($existingData);
+    file_put_contents($file, $content);
+}
+
+public function readExistingData()
+{
+    $file = $this->grav['locator']->findResource('user://data/contactus/data.json', true, true);
+    if (file_exists($file)) {
+        $content = file_get_contents($file);
+        return json_decode($content, true);
+    } else {
+        // If the file doesn't exist yet, return an empty array
+        return [];
+    }
+}
+
+    
 }
