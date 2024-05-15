@@ -16,7 +16,8 @@ var createChatLi = function (message, className) {
     return chatLi; // return chat <li> element
 };
 var generateResponse = function (chatElement) {
-    var API_URL = "https://api.openai.com/v1/chat/completions";
+    // var API_URL = "https://api.openai.com/v1/chat/completions";
+    // $apiUrl = "https://api.openai.com/v1/chat/completions";
     var messageElement = chatElement.querySelector("p");
     // Define the properties and message for the API request
     var requestOptions = {
@@ -34,7 +35,7 @@ var generateResponse = function (chatElement) {
     if (messageElement)
         messageElement.textContent = "Thinking...";
     // Send POST request to API and handle streaming response
-    fetch(API_URL, requestOptions)
+    fetch(apiUrl, requestOptions)
         .then(function (response) { return response.json(); })
         .then(function (data) {
         var content = data.choices[0].message.content.trim(); // Extract content from response

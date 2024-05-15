@@ -35,25 +35,26 @@ form:
       label: Chatbot_name
       help: select the chatbot name
     api_url:
-      type: text
-      label: API URL
-      default: "https://localhost:8000/aibot"
+      type: select
+      label: api_url
+      help: Select the API_URL
+      options:
+        https://api.openai.com/v1/chat/completions: https://api.openai.com/v1/chat/completions
+        http://127.0.0.1:5000/stream_chatbot: http://127.0.0.1:5000/stream_chatbot
       validate:
         required: true
+    # api_url:
+    #   type: text
+    #   label: API URL
+    #   default: "https://localhost:8000/aibot"
+    #   validate:
+    #     required: true
+
     # query_param:
     #   type: selectize
     #   label: Parameter
     #   help: Select multiple items
     #   multiple: true
-    #   validate:
-    #     required: true
-    # query_output:
-    #   type: select
-    #   label: Query Output
-    #   help: Select the query output
-    #   options:
-    #     JSON: JSON
-    #     TEXT: TEXT
     #   validate:
     #     required: true
     # message:

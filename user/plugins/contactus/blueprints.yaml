@@ -34,3 +34,8 @@ form:
       type: text
       label: PLUGIN_CONTACTUS.TEXT_VARIABLE
       help: PLUGIN_CONTACTUS.TEXT_VARIABLE_HELP
+permissions:
+  access:
+    admin.contact_data.access:
+      label: 'Access Contact Data'
+      description: 'Allows access to the Contact Us data menu item.'

@@ -1,0 +1,66 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Agreement Data</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Job Agreement Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>MobileNo</th>
+                <th>Birth Date</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Region</th>
+                <th>Postal Code</th>
+                <th>Job Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in jobData %}
+            <tr>
+                <td>{{ item.fullName }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.phoneNumber }}</td>
+                <td>{{ item.birthDate }}</td>
+                <td>{{ item.gender }}</td>
+                <td>{{ item.streetAddress }} {{ item.streetAddressLine2 }}</td>
+                <td>{{ item.city }}</td>
+                <td>{{ item.region }}</td>
+                <td>{{ item.postalCode }}</td>
+                <td>{{ item.jobType }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+{% endblock %}

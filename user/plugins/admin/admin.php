@@ -827,7 +827,7 @@ class AdminPlugin extends Plugin
     /**
      * @return void
      */
-    public function onAdminMenu()
+    public function onAdminMenu($event)
     {
         /** @var Twig $twig */
         $twig = $this->grav['twig'];
@@ -893,14 +893,16 @@ class AdminPlugin extends Plugin
         ];
 
 
+        // Modify the onAdminMenu function to include a menu item for contact data
         // $twig->plugins_hooked_nav['contactus'] = [
-        //     'route' => '/contactus',
-        //     'icon' => 'fa-database', // Choose an appropriate icon
-        //     'authorize' => ['contactus.access'], // Adjust authorization as needed
-        //     'priority' => 10 // Adjust the priority to position your item in the menu
+        //     'route' => 'contactUsPage',
+        //     'icon' => 'fa-envelope',
+        //     'authorize' => ['admin.contact_data.access'], // Adjust authorization as needed
+        //     'priority' => 8 // Adjust the priority to position your item in the menu
         // ];
 
     }
+
 
     /**
      * Check if the current route is under the admin path
