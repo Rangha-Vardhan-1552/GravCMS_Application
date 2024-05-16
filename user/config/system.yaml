@@ -39,6 +39,7 @@ errors:
 debugger:
   enabled: true
   twig: true
+  provider: debugbar
   shutdown:
     close_connection: true
 gpm:

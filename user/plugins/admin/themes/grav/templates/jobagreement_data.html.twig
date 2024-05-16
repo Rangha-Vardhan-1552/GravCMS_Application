@@ -29,23 +29,24 @@
 </head>
 <body>
     <h1>Job Agreement Data</h1>
+    {{ print_r(items)}}
     <table>
         <thead>
             <tr>
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>MobileNo</th>
-                <th>Birth Date</th>
+                <th>DOB</th>
                 <th>Gender</th>
                 <th>Address</th>
                 <th>City</th>
                 <th>Region</th>
-                <th>Postal Code</th>
+                <th>PinCode</th>
                 <th>Job Type</th>
             </tr>
         </thead>
         <tbody>
-            {% for item in jobData %}
+            {% for item in items  %}
             <tr>
                 <td>{{ item.fullName }}</td>
                 <td>{{ item.email }}</td>

@@ -42,7 +42,10 @@
     {% block header %}
         <section id="header" class="section">
             <section class="container {{ grid_size }}">
-                <nav class="navbar">
+                {% block header_navi %}
+                    {% include 'megamenu.html.twig' %}
+                {% endblock %}
+                <!-- <nav class="navbar">
                     <section class="navbar-section logo">
                         {% include 'partials/logo.html.twig' %}
                     </section>
@@ -59,16 +62,16 @@
                         {% endif %}
 
                     </section>
-                </nav>
+                </nav> -->
             </section>
         </section>
-        <div class="mobile-menu">
+        <!-- <div class="mobile-menu">
             <div class="button_container" id="toggle">
                 <span class="top"></span>
                 <span class="middle"></span>
                 <span class="bottom"></span>
             </div>
-        </div>
+        </div> -->
     {% endblock %}
 
     {% block hero %}{% endblock %}

@@ -21,16 +21,23 @@
           <label>Email Address</label>
           <input type="email" name="email" placeholder="Enter email address" required />
         </div>
-
+        <div class="input-box">
+          <div class="select-box">
+                <select name="jobType">
+                  <option hidden>Job Type</option>
+                  <option>Developer</option>
+                  <option>Tester</option>
+                  <option>Intern</option>
+                  <option>Other</option>
+                </select>
+              </div>
+        </div>
         <div class="column">
           <div class="input-box">
             <label>Phone Number</label>
             <input type="number" name="phoneNumber" placeholder="Enter phone number" required />
           </div>
-          <div class="input-box">
-            <label>Birth Date</label>
-            <input type="date" name="birthDate" placeholder="Enter birth date" required />
-          </div>
+          
         </div>
         <div class="gender-box">
           <h3>Gender</h3>
@@ -54,16 +61,8 @@
           <input type="text" name="streetAddress" placeholder="Enter street address" required />
           <input type="text" name="streetAddressLine2" placeholder="Enter street address line 2" required />
           <div class="column">
-            <div class="select-box">
-              <select name="jobType">
-                <option hidden>Job Type</option>
-                <option>Developer</option>
-                <option>Tester</option>
-                <option>Intern</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <input type="text" name="city" placeholder="Enter your city" required />
+              <input type="date" name="birthDate" placeholder="Enter birth date" required />
+              <input type="text" name="city" placeholder="Enter your city" required />
           </div>
           <div class="column">
             <input type="text" name="region" placeholder="Enter your region" required />
