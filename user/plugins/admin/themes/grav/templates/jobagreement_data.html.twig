@@ -29,7 +29,7 @@
 </head>
 <body>
     <h1>Job Agreement Data</h1>
-    {{ print_r(items)}}
+    {{ parent().data }}
     <table>
         <thead>
             <tr>
@@ -60,6 +60,7 @@
                 <td>{{ item.jobType }}</td>
             </tr>
             {% endfor %}
+            
         </tbody>
     </table>
 </body>

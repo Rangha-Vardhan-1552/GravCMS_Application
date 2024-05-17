@@ -15,6 +15,7 @@ class ContactusPlugin extends Plugin
                 ['onPluginsInitialized', 0]
             ],
             'onFormProcessed' => ['onFormProcessed', 0],
+            'onTwigSiteVariables' => ['onTwigSiteVariables', 0]
         ];
     }
 
@@ -29,7 +30,7 @@ class ContactusPlugin extends Plugin
             $this->enable([
                 'onAdminMenu' => ['onAdminMenu', 0],
                 'onAdminPageInitialized'=> ['onAdminPageInitialized',0],
-                'onGetContactData' => ['onGetContactData', 0]
+                
             ]);
             return;
         }
@@ -75,28 +76,12 @@ class ContactusPlugin extends Plugin
         }
     }
 
-    public function onGetContactData()
-{
-    // if (!$this->grav['user']->authenticated || !$this->grav['user']->authorize('admin.pages')) {
-    //     header('HTTP/1.1 403 Forbidden');
-    //     exit();
-    // }
-
-    // Get the path to the JSON file
-    $filePath = 'user://data/contactus/data.json';
-
-    // Create an instance of CompiledJsonFile
-    $file = CompiledJsonFile::instance($filePath);
-
-    // Get the content of the JSON file
-    $data = $file->content();
-    // Return the data as JSON
-    header('Content-Type: application/json');
-    $jsondata=json_encode($data);
-    $this->grav['twig']->twig_vars['items'] = $jsondata;
-    echo $jsondata;
-    exit();
-}
+    public function onTwigSiteVariables()
+    {
+        $file = CompiledJsonFile::instance($this->grav['locator']->findResource('user://data/contactus/data.json', true, true));
+        $data = $file->content();
+        $this->grav['twig']->twig_vars['contactdetails'] = $data;
+    }
 
     public function storeData($data)
     {

@@ -11,28 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for item in [
-    {
-        "name": "vijay",
-        "email": "vijayon@example.com",
-        "message": "I would like to inquire about your services."
-    },
-    {
-        "name": "Ranga",
-        "email": "ranga@example.com",
-        "message": "Can you provide a quote for a custom project?"
-    },
-    {
-        "name": "jyothi",
-        "email": "jyothi@example.com",
-        "message": "I am interested in collaborating on a new venture."
-    },
-    {
-        "name": "ameya",
-        "email": "ameya@gmail.com",
-        "message": "I need to workout"
-    }
-] %}
+                {% for item in contactdetails %}
                     <tr>
                         <td>{{ item.name }}</td>
                         <td>{{ item.email }}</td>
