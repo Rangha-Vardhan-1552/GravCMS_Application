@@ -10,7 +10,6 @@ nav{
   position: fixed;
   z-index: 99;
   width: 100%;
-  
   /* background: #242526; */
 }
 nav .wrapper{
@@ -33,12 +32,13 @@ nav .wrapper{
 }
 .wrapper .nav-links{
   display: inline-flex;
+  color:white;
 }
 .nav-links li{
   list-style: none;
 }
 .nav-links li a{
-  color: #f2f2f2;
+  /* color: #f2f2f2; */
   text-decoration: none;
   font-size: 18px;
   font-weight: 500;
@@ -47,14 +47,15 @@ nav .wrapper{
   transition: all 0.3s ease;
 }
 .nav-links li a:hover{
-  background:#CBC3E3;
+  background:palegreen;
+  
 }
 .nav-links .mobile-item{
   display: none;
 }
 .nav-links .drop-menu{
   position: absolute;
-  background: #242526;
+  /* background: #242526; */
   width: 180px;
   line-height: 45px;
   top: 85px;
@@ -86,8 +87,8 @@ nav .wrapper{
   visibility: hidden;
 }
 .mega-box .content{
-  background: #242526;
-  padding: 25px 20px;
+  background: skyblue;
+  padding: 0px 20px;
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -99,8 +100,11 @@ nav .wrapper{
 }
 .content .row img{
   width: 100%;
-  height: 100%;
+  height: 80%;
+  padding:10px;
   object-fit: cover;
+  border:1px solid;
+  border-radius:5px;
 }
 .content .row header{
   color: #f2f2f2;
@@ -147,7 +151,7 @@ nav .wrapper{
     max-width: 350px;
     top: 0;
     left: -100%;
-    background: #242526;
+    background: skyblue;
     display: block;
     padding: 50px 10px;
     line-height: 50px;
@@ -200,6 +204,7 @@ nav .wrapper{
   }
   .nav-links .desktop-item{
     display: none;
+    color:black;
   }
   .nav-links .mobile-item{
     display: block;
@@ -314,8 +319,8 @@ nav input{
           <div class="mega-box">
             <div class="content">
               <div class="row">
-                <!-- {% include 'partials/imageSlider.html.twig' %} -->
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYcYjA9mrv0__0q_40g-mQfPOuC7tTnPzFJtUIsKHvtA&s">
+                {% include 'partials/blog/imageSlider.html.twig' %}
+                <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYcYjA9mrv0__0q_40g-mQfPOuC7tTnPzFJtUIsKHvtA&s"> -->
               </div>
               <div class="row">
                 <header>Design Services</header>
