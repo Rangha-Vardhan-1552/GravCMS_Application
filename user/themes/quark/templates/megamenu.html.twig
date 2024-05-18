@@ -1,3 +1,5 @@
+
+{% block content %}
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
@@ -96,7 +98,7 @@ nav .wrapper{
 }
 .mega-box .content .row{
   width: calc(25% - 30px);
-  line-height: 45px;
+  line-height: 35px;
 }
 .content .row img{
   width: 100%;
@@ -283,7 +285,7 @@ nav input{
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Mega Menu | CodingNepal</title>
+    <title>Purview Services</title>
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 </head>
@@ -297,21 +299,7 @@ nav input{
       
       <ul class="nav-links">
         <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
-        <!-- <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li> -->
-
-            {% include 'partials/navigation.html.twig' %}
-        <!-- <li>
-          <a href="#" class="desktop-item">Dropdown Menu</a>
-          <input type="checkbox" id="showDrop">
-          <label for="showDrop" class="mobile-item">Dropdown Menu</label>
-          <ul class="drop-menu">
-            <li><a href="#">Drop menu 1</a></li>
-            <li><a href="#">Drop menu 2</a></li>
-            <li><a href="#">Drop menu 3</a></li>
-            <li><a href="#">Drop menu 4</a></li>
-          </ul>
-        </li> -->
+        {% include 'partials/navigation.html.twig' %}
         <li>
           <a href="#" class="desktop-item">Services</a>
           <input type="checkbox" id="showMega">
@@ -365,3 +353,4 @@ nav input{
 
 </body>
 </html>
+{% endblock %}

@@ -1,9 +1,9 @@
 ---
 title: jobagreement
-template: 'jobagreement'
+template: jobagreement
 process:
     markdown: true
     twig: true
 ---
-{% include 'jobagreement.html.twig' %}
+<!-- {% include 'jobagreement.html.twig' %} -->
 

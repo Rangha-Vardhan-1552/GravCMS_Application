@@ -12,7 +12,11 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgb(130, 106, 251);
+  /* background: rgb(130, 106, 251); */
+  background-image: url('https://s38924.pcdn.co/wp-content/uploads/2018/11/Job-Application-Form.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .container {
   position: relative;
