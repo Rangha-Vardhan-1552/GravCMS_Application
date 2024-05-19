@@ -1,5 +1,5 @@
-
- {% block content %}
+{% extends 'partials/base.html.twig' %}
+{% block content %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -33,15 +33,12 @@
                 </select>
               </div>
         </div>
-        <div class="column">
           <div class="input-box">
             <label>Phone Number</label>
             <input type="number" name="phoneNumber" placeholder="Enter phone number" required />
           </div>
-          
-        </div>
         <div class="gender-box">
-          <h3>Gender</h3>
+          <label>Gender</label>
           <div class="gender-option">
             <div class="gender">
               <input type="radio" id="check-male" name="gender" value="male" checked />
